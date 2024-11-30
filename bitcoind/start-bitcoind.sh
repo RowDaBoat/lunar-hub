@@ -55,9 +55,9 @@ if [ "$NETWORK" != "mainnet" ]; then
    PARAMS="-$NETWORK"
 fi
 
+#    "-rpcauth"="$RPCAUTH" \
 PARAMS=$(echo $PARAMS \
     "-debug"="$DEBUG" \
-    "-rpcauth"="$RPCAUTH" \
     "-datadir"="/data" \
     "-debuglogfile"="/data/debug.log" \
     "-rpcbind"="0.0.0.0" \
@@ -70,6 +70,11 @@ PARAMS=$(echo $PARAMS \
 # Add user parameters to the command.
 PARAMS="$PARAMS $@"
 
-# Print command and start bitcoin node.
+# Print command.
 echo "Command: bitcoind $PARAMS"
+
+# Print bitcoin.conf.
+echo "bitcoin.conf:" && cat bitcoin.conf
+
+# Start bitcoin node.
 exec bitcoind $PARAMS

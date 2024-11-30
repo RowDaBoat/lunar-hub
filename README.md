@@ -24,7 +24,7 @@ docker-compose up
 
 ## TODO
 - [x] run `bitcoind` + `lnd`
-- [ ] run in `testnet4`
+- [x] run in `testnet3`
 - [ ] verify `lnd` is communicating with `bitcoind` propperly through ZeroMQ.
 - [ ] check Balance of Satoshi.
 
@@ -35,4 +35,3 @@ docker-compose up
 ```bash
 docker run -d --name lnd-testnet lightninglabs/lnd:v0.14.1-beta --bitcoin.active --bitcoin.testnet --bitcoin.node=neutrino --neutrino.connect=faucet.lightning.community
 ```
-

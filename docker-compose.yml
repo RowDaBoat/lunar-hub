@@ -1,8 +1,5 @@
 version: '3'
 services:
-    # lightninglabs/bitcoin-core is the base image for bitcoind.
-    # The environment variables default values determined on stage of container
-    # start within starting script.
     bitcoind:
       image: bitcoind
       container_name: bitcoind
@@ -35,12 +32,8 @@ services:
         - "bitcoind:blockchain"
 
 volumes:
-  # bitcoin volume is needed for maintaining blockchain persistence
-  # during btcd container recreation.
   bitcoin:
     driver: local
 
-  # lnd volume is used for persisting lnd application data and chain state
-  # during container lifecycle.
   lnd:
     driver: local

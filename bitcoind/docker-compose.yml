@@ -1,0 +1,18 @@
+version: '3'
+services:
+    bitcoind:
+      image: bitcoind
+      build:
+        context: ./
+      container_name: bitcoind
+      volumes:
+        - bitcoin:/data
+      environment:
+        - RPCAUTH
+        - NETWORK
+        - BITCOIND_DEBUG
+      entrypoint: ["./start-bitcoind.sh"]
+
+volumes:
+  bitcoin:
+    driver: local
