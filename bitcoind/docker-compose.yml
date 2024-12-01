@@ -11,7 +11,7 @@ services:
         - RPCAUTH
         - NETWORK
         - BITCOIND_DEBUG
-      entrypoint: ["./start-bitcoind.sh"]
+      entrypoint: ["./start.sh"]
 
 volumes:
   bitcoin:
