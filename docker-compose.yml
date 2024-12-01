@@ -1,31 +1,15 @@
 version: '3'
-services:
-    bitcoind:
-      image: bitcoind
-      container_name: bitcoind
-      build:
-        context: bitcoind/
-      volumes:
-        - bitcoin:/data
-      entrypoint: ["./start.sh"]
 
-    lnd:
-      image: lnd
-      container_name: lnd
-      build:
-        context: lnd/
-      environment:
-        - RPCUSER
-        - RPCPASS
-        - NETWORK
-        - CHAIN
-        - LND_DEBUG
-        - BACKEND=bitcoind
-      volumes:
-        - lnd:/root/.lnd
-      entrypoint: ["./start.sh"]
-      links:
-        - "bitcoind:blockchain"
+services:
+  bitcoind:
+    extends:
+      file: bitcoind/docker-compose.yml
+      service: bitcoind
+
+  lnd:
+    extends:
+      file: lnd/docker-compose.yml
+      service: lnd
 
 volumes:
   bitcoin:

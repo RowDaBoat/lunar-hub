@@ -25,7 +25,7 @@ docker-compose up
 ## TODO
 - [x] run `bitcoind` + `lnd`
 - [x] run in `testnet3`
-- [ ] verify `lnd` is communicating with `bitcoind` propperly through ZeroMQ.
+- [x] verify `lnd` is communicating with `bitcoind` propperly through ZeroMQ.
 - [ ] check Balance of Satoshi.
 
 ## Development Notes

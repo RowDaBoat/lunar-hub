@@ -2,7 +2,7 @@
 
 set -e
 
-RPCHOST="blockchain"
+RPCHOST="bitcoind"
 HOSTNAME=$(hostname)
 
 # CAUTION:
