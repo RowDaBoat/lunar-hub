@@ -41,3 +41,8 @@ finalize() {
         echo "Configuration discarded."
     fi
 }
+
+finalize_silently() {
+    mv $CONFIG_FILE.tmp $CONFIG_FILE
+    echo "Configuration saved: '$CONFIG_FILE'."
+}

@@ -13,5 +13,7 @@ prompt_config "Enable debug?" "debug" "1"
 
 finalize
 
+
 echo "$authorization" | jq > rpcauth.secret
-echo "RPC Auth info saved to 'rpcauth.secret', this file is in '.gitignore'."
+echo "Configuration saved: 'rpcauth.secret'."
+echo "This secret file is in '.gitignore'."

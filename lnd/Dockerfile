@@ -51,10 +51,9 @@ COPY --from=builder /go/src/github.com/lightningnetwork/lnd/scripts/keys/* /keys
 RUN sha256sum /bin/lnd /bin/lncli > /shasums.txt \
   && cat /shasums.txt
 
-COPY start-lnd.sh .
+COPY start.sh .
+RUN chmod +x ./start.sh
+COPY lnd.conf lnd.conf.secret ./
 
 # Expose lnd ports (p2p, rpc).
 EXPOSE 9735 10009
-
-# Specify the start command and entrypoint as the lnd daemon.
-ENTRYPOINT ["lnd"]

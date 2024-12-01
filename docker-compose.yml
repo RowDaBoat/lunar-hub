@@ -7,10 +7,6 @@ services:
         context: bitcoind/
       volumes:
         - bitcoin:/data
-      environment:
-        - RPCAUTH
-        - NETWORK
-        - BITCOIND_DEBUG
       entrypoint: ["./start.sh"]
 
     lnd:
@@ -27,7 +23,7 @@ services:
         - BACKEND=bitcoind
       volumes:
         - lnd:/root/.lnd
-      entrypoint: ["./start-lnd.sh"]
+      entrypoint: ["./start.sh"]
       links:
         - "bitcoind:blockchain"
 
