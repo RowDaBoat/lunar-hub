@@ -1,8 +1,3 @@
-# If you change this value, please change it in the following files as well:
-# /dev.Dockerfile
-# /make/builder.Dockerfile
-# /.github/workflows/main.yml
-# /.github/workflows/release.yml
 FROM golang:1.22.6-alpine as builder
 
 # Force Go to use the cgo based DNS resolver. This is required to ensure DNS
@@ -53,7 +48,7 @@ RUN sha256sum /bin/lnd /bin/lncli > /shasums.txt \
 
 COPY start.sh .
 RUN chmod +x ./start.sh
-COPY lnd.conf lnd.conf.secret ./
+COPY lnd.conf ./
 
 # Expose lnd ports (p2p, rpc).
 EXPOSE 9735 10009

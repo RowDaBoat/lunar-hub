@@ -20,6 +20,11 @@ save_config() {
     echo -e "$parameter=$value" >> $CONFIG_FILE.tmp
 }
 
+save_header() {
+    echo "" >> $CONFIG_FILE.tmp
+    echo -e "[$1]" >> $CONFIG_FILE.tmp
+}
+
 prompt_config() {
     local parameter="$2"
 

@@ -11,20 +11,25 @@ save_config "bitcoin.$NETWORK" "1"
 
 prompt_config "Debug level (trace|debug|info|warn|error|critical)" "debuglevel" "info"
 
-if [ "$NETWORK" != "mainnet" ]; then
+if [ "$NETWORK" = "testnet" ]; then
+    save_config "noseedbackup" "1"
+elif [ "$NETWORK" = "signet" ]; then
+    save_config "noseedbackup" "1"
+elif [ "$NETWORK" = "regtest" ]; then
     save_config "noseedbackup" "1"
 fi
 
+save_header "Bitcoind"
+save_config "bitcoind.dir=/data"
+
+if [ "$NETWORK" = "mainnet" ]; then
+    save_config "bitcoind.rpccookie" "/data/.cookie"
+elif [ "$NETWORK" = "testnet" ]; then
+    save_config "bitcoind.rpccookie" "/data/testnet3/.cookie"
+elif [ "$NETWORK" = "signet" ]; then
+    save_config "bitcoind.rpccookie" "/data/signet/.cookie"
+elif [ "$NETWORK" = "regtest" ]; then
+    save_config "bitcoind.rpccookie" "/data/regtest/.cookie"
+fi
+
 finalize
-
-
-prepare "lnd.conf.secret"
-
-RPCUSER=$(cat ../bitcoind/rpcauth.secret | jq -r '.username')
-RPCPASS=$(cat ../bitcoind/rpcauth.secret | jq -r '.password')
-
-save_config "bitcoind.rpcuser" $RPCUSER
-save_config "bitcoind.rpcpass" $RPCPASS
-
-finalize_silently
-echo "This secret file is in '.gitignore'."

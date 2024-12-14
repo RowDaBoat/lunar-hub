@@ -3,23 +3,21 @@
 set -e
 
 PARAMS="\
-    -datadir=/data \
     -debuglogfile=/data/debug.log \
     -rpcbind=0.0.0.0 \
     -rpcallowip=0.0.0.0/0 \
     -zmqpubrawblock=tcp://0.0.0.0:28332 \
     -zmqpubrawtx=tcp://0.0.0.0:28333 \
-    -txindex \
-    -conf=/bitcoin.conf"
+    -txindex"
 
-# Print command.
+# Print bitcoin.conf
+echo "bitcoin.conf:"
+cat /root/.bitcoin/bitcoin.conf
+echo ""
+
+# Print command
 echo "Command: bitcoind $PARAMS"
 echo ""
 
-# Print bitcoin.conf.
-echo "bitcoin.conf:"
-cat /bitcoin.conf
-echo ""
-
-# Start bitcoin node.
+# Start bitcoin node
 exec bitcoind $PARAMS
