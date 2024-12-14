@@ -20,7 +20,7 @@ elif [ "$NETWORK" = "regtest" ]; then
 fi
 
 save_header "Bitcoind"
-save_config "bitcoind.dir=/data"
+save_config "bitcoind.dir" "/data"
 
 if [ "$NETWORK" = "mainnet" ]; then
     save_config "bitcoind.rpccookie" "/data/.cookie"
