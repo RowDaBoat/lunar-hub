@@ -4,7 +4,7 @@
 
 prepare "bitcoin.conf"
 
-save_config "Data directory" "/data"
+save_config "datadir" "/data"
 prompt_config "Chain (main|test|signet|regtest)" "chain" "test"
 prompt_config "Enable debug" "debug" "1"
 
