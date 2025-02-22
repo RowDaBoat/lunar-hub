@@ -7,7 +7,8 @@ PARAMS="\
     -rpcbind=0.0.0.0 \
     -rpcallowip=0.0.0.0/0 \
     -zmqpubrawblock=tcp://0.0.0.0:28332 \
-    -zmqpubrawtx=tcp://0.0.0.0:28333"
+    -zmqpubrawtx=tcp://0.0.0.0:28333 \
+    -rpccookiefile=/data/.cookie"
 
 # Print bitcoin.conf
 echo "bitcoin.conf:"
