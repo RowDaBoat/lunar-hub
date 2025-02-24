@@ -1,7 +1,5 @@
 # Lunar Hub
-
 ## Goals
-
 - Help both experienced and new Bitcoiners build nodes from scratch.
 - Build a lean, controllable setup using `docker` and `docker-compose`.
 - Understand how the ecosystem works.
@@ -12,16 +10,13 @@
 
 
 ## Requirements
-
 - Linux
 - `docker`
 - `docker-compose`
 
 
 ## Running it
-
 Just clone this repository and run:
-
 ```bash
 docker-compose up
 ```
@@ -35,7 +30,7 @@ docker-compose up
     - [x] move the `datadir` configuration from `start.sh` to `bitcoin.conf`
     - [x] move `bitcoin.conf` to the default dir `/root/.bitcoin/bitcoin.conf`
     - [x] do not generate rpcauth
-    - [ ] update setup script
+    - [x] update setup script
 - [x] make `lnd` see `bitcoind`'s authentication cookie.
     - [x] adapt `setup.sh` to properly configure `bitcoind.rpccookie`
     - [x] make `start.sh` read `lnd.conf:bitcoind.rpccookie` properly and wait on it to be ready
