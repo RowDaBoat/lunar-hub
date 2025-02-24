@@ -11,9 +11,18 @@ services:
       file: lnd/docker-compose.yml
       service: lnd
 
+#  nginx-proxy:
+#    extends:
+#      file: nginx-proxy/docker-compose.yml
+#      service: nginx-proxy
+
 volumes:
   bitcoin:
     driver: local
 
   lnd:
     driver: local
+
+networks:
+  bitcoin:
+    driver: bridge

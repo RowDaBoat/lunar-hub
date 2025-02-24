@@ -9,3 +9,5 @@ services:
         - lnd:/root/.lnd
         - bitcoin:/data
       entrypoint: ["./start.sh"]
+      networks:
+        - bitcoin

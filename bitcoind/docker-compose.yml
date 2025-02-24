@@ -8,3 +8,5 @@ services:
       volumes:
         - bitcoin:/data
       entrypoint: ["./start.sh"]
+      networks:
+        - bitcoin
