@@ -3,6 +3,6 @@ services:
   nipple-05:
     image: busybox
     volumes:
-      - ./.well-known:/www/.well-known:ro
+      - ./well-known:/www/.well-known:ro
     working_dir: /www
     command: httpd -f -p 80
