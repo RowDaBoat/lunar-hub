@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker compose $1 -d nginx-proxy nipple-05
+docker compose $@ nginx-proxy nipple-05
 
