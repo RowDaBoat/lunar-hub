@@ -1,7 +1,8 @@
 version: '3'
 services:
   ord:
-    image: ord
+    image: ord${ENV_SUFFIX}
+    container_name: ord${ENV_SUFFIX}
     build:
       context: ./
     volumes:

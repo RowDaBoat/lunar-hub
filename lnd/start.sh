@@ -12,7 +12,7 @@ HOSTNAME=$(hostname)
 PARAMS="\
     --rpclisten=$HOSTNAME:10009 \
     --rpclisten=localhost:10009 \
-    --bitcoind.rpchost=$RPCHOST \
+    --bitcoind.rpchost=$RPCHOST:8332 \
     --bitcoind.zmqpubrawblock=tcp://$RPCHOST:28332 \
     --bitcoind.zmqpubrawtx=tcp://$RPCHOST:28333"
 
@@ -25,7 +25,6 @@ echo ""
 
 # Wait for cookie to be available
 COOKIE_FILE=$(grep -E '^bitcoind\.rpccookie=' "$LND_CONF" | awk -F '=' '{print $2}')
-echo $COOKIE_FILE
 echo "Waiting for bitcoind's cookie file to be created..."
 
 while [ ! -f $COOKIE_FILE ]; do

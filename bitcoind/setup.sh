@@ -5,8 +5,9 @@
 prepare "bitcoin.conf"
 
 save_config "datadir" "/data"
-prompt_config "Chain (main|test|signet|regtest)" "chain" "test"
-prompt_config "Enable debug" "debug" "1"
+NETWORK=$(ask "Chain (main|test|signet|regtest)" "test")
+save_config "chain" $NETWORK
+prompt_config "Enable debug" "debug" "0"
 
 PRUNE=$(ask "Prune (size in MB)" "no")
 
@@ -16,4 +17,18 @@ else
     save_config "txindex" "1"
 fi
 
+prompt_config "Enable server (required for services such as ord)" "server" "0" 
+
+if [ "$NETWORK" = "main" ]; then
+    save_config "rpccookiefile" "/data/.cookie"
+elif [ "$NETWORK" = "test" ]; then
+    save_config "rpccookiefile" "/data/testnet3/.cookie"
+elif [ "$NETWORK" = "signet" ]; then
+    save_config "rpccookiefile" "/data/signet/.cookie"
+elif [ "$NETWORK" = "regtest" ]; then
+    save_config "rpccookiefile" "/data/regtest/.cookie"
+fi
+
+
 finalize
+

@@ -1,7 +1,8 @@
 version: '3'
 services:
     bitcoind:
-      image: bitcoind
+      image: bitcoind${ENV_SUFFIX}
+      container_name: bitcoind${ENV_SUFFIX}
       build:
         context: ./
       volumes:

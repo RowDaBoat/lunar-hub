@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-set -e
-
-RPCHOST="bitcoind"
+#set -e
 
 PARAMS="\
-    --config ord.conf\
-    --bitcoin-rpc-url $RPCHOST"
+--config ord.conf \
+--bitcoin-rpc-url bitcoind"
 
 # Print ord.conf 
 echo "ord.conf:"
@@ -27,3 +25,4 @@ echo ""
 
 # Start ord service
 exec ord $PARAMS server
+

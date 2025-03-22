@@ -6,9 +6,9 @@ PARAMS="\
     -debuglogfile=/data/debug.log \
     -rpcbind=0.0.0.0 \
     -rpcallowip=0.0.0.0/0 \
+    -rpcport=8332 \
     -zmqpubrawblock=tcp://0.0.0.0:28332 \
-    -zmqpubrawtx=tcp://0.0.0.0:28333 \
-    -rpccookiefile=/data/.cookie"
+    -zmqpubrawtx=tcp://0.0.0.0:28333"
 
 # Print bitcoin.conf
 echo "bitcoin.conf:"
