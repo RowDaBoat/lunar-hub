@@ -2,7 +2,6 @@ version: '3'
 services:
     bitcoind:
       image: bitcoind
-      container_name: bitcoind
       build:
         context: ./
       volumes:

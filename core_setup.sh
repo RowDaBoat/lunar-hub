@@ -16,8 +16,9 @@ ask() {
 save_config() {
     local parameter="$1"
     local value="$2"
+    local assign_op="${ASSIGN_OP:-=}"
 
-    echo -e "$parameter=$value" >> $CONFIG_FILE.tmp
+    echo -e "$parameter$assign_op$value" >> $CONFIG_FILE.tmp
 }
 
 save_header() {

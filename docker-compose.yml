@@ -11,6 +11,11 @@ services:
       file: lnd/docker-compose.yml
       service: lnd
 
+  ord:
+    extends:
+      file: ord/docker-compose.yml
+      service: ord
+
   nginx-proxy:
     extends:
       file: nginx-proxy/docker-compose.yml

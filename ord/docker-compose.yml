@@ -1,11 +1,10 @@
 version: '3'
 services:
-  lnd:
-    image: lnd
+  ord:
+    image: ord
     build:
       context: ./
     volumes:
-      - lnd:/root/.lnd
       - bitcoin:/data
     entrypoint: ["./start.sh"]
     networks:

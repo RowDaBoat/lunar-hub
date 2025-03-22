@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker compose $@ bitcoind lnd
+docker compose $@ bitcoind lnd ord
 
