@@ -4,7 +4,7 @@
 
 PARAMS="\
 --config ord.conf \
---bitcoin-rpc-url bitcoind"
+--bitcoin-rpc-url bitcoind:8332"
 
 # Print ord.conf 
 echo "ord.conf:"
