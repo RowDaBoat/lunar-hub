@@ -1,50 +1,70 @@
-# Lunar Hub
-## Goals
-- Help both experienced and new Bitcoiners build nodes from scratch.
-- Build a lean, controllable setup using `docker` and `docker-compose`.
-- Understand how the ecosystem works.
-- Encourage command-line proficiency, avoid falling into Umbrel.
-- Write easy-to-read scripts.
-- Write a markdown doc explaining the setup process.
-- I don't know how to do this, but it's fun, and I can learn.
+# nodrop.btc
+_No Drama Operations for Bitcoin and frens._
 
+
+## What's nodrop.btc?
+- An easily extensible bare-bones approach to DevOps on Bitcoin that minimizes dependencies.
+- `nodrop.btc` integrates well-known Bitcoin-related services in a simple way using `docker` to run and manage services.
+- Configurations aim to be the most unassuming possible, generated with guided scripts, but still retaining the full customization options of each service.
+- Encourages newcomers to install Bitcoin's ecosystem services without the hassle.
 
 ## Requirements
-- Linux
-- `docker`
-- `docker-compose`
+Any Linux machine with `Linux`, `git`, and `docker`.
+- No full OS installs.
+- No special hardware.
+- No drama.
 
 
-## Running it
-Just clone this repository and run:
+## Getting Started
+Clone this repository and start `bitcoind`, `lnd`, and `ord`:
 ```bash
-docker-compose up
+git clone https://github.com/RowDaBoat/nodrop.btc
+cd nodrop.btc
+./bitcoin-group.sh up -d
+```
+
+Stop all three any time with:
+```
+./bitcoin-group.sh down
+```
+
+The `*-group.sh` scripts wrap `docker compose` for convenience. Any one of the services can be started or stopped individually with regular `docker compose` commands:
+```
+docker compose up lnd
+docker compose down lnd
 ```
 
 
-## TODO
-- [x] run `bitcoind` + `lnd`
-- [x] run in `testnet3`
-- [x] verify `lnd` is communicating with `bitcoind` propperly through ZeroMQ.
-- [ ] allow running `bitcoin-cli` without specifying config, user, and pass
-    - [x] move the `datadir` configuration from `start.sh` to `bitcoin.conf`
-    - [x] move `bitcoin.conf` to the default dir `/root/.bitcoin/bitcoin.conf`
-    - [x] do not generate rpcauth
-    - [x] update setup script
-- [x] make `lnd` see `bitcoind`'s authentication cookie.
-    - [x] adapt `setup.sh` to properly configure `bitcoind.rpccookie`
-    - [x] make `start.sh` read `lnd.conf:bitcoind.rpccookie` properly and wait on it to be ready
-    - [x] move `lnd.conf` to its default location
-    - [ ] update setup script
-- [ ] test it by opening some channels
-- [ ] run in `mainnet`
-- [ ] services to integrate:
-    - [ ] Electrs
-    - [ ] RTL
-    - [ ] Balance of Satoshi
-    - [ ] Nostr
+## Configuring a service
+Each service has a `setup.sh` script in its folder. For example, to configure `bitcoind`, run the setup script, stop the service if running, and then rebuild and restart the service:
+```
+cd bitcoind
+./setup.sh
+cd ..
+docker compose down bitcoind
+docker compose up -d --build bitcoind
+```
 
 
-## Useful links
-- [bitcoin.conf generator](https://jlopp.github.io/bitcoin-core-config-generator/)
-- [lnd.conf generator](https://0xbeefcaf3.github.io/LND-config-generator/#config=eyJiaXRjb2luIjp7ImJpdGNvaW4uYWN0aXZlIjoxfX0=)
+## Integrated Services
+### Bitcoin Group
+- `bitcoind`: [Bitcoin](https://github.com/bitcoin/bitcoin). Full node for the Bitcoin network.
+- `lnd`: Bitcoin's Layer 2, the [Lightning Network](https://github.com/lightningnetwork/lnd).
+- `ord`: [Ordinals](https://github.com/ordinals/ord) indexing service.
+
+### Web Group
+- `nipple-05`: a bare-bones implementation of [Nostr's NIP-05](https://github.com/nostr-protocol/nips/blob/master/05.md) internet identifiers.
+- `nginx-proxy`: an [nginx](https://github.com/nginx/nginx) configured as a proxy for web services.
+
+
+## Service Structure
+
+Each service has:
+- An entry in the root `docker-compose.yml` detailing the service name and where to locate the actual service's `docker-compose.yml` file.
+- A directory named after the service containing a `docker-compose.yml` file describing the service's container, the volumes it requires, the ports it uses, and which network it connects to.
+
+Additionally, the service's directory may include:
+- `setup.sh`: a script used to generate configuration files.
+- `<service-name>.conf`: a default configuration, this file will be overwritten by `setup.sh`.
+- `start.sh`: runs the service with some preset options designed to ease configuration.
+- `Dockerfile`: builds the service. It's used if a Docker image was not made publicly available by the original developer of the service.

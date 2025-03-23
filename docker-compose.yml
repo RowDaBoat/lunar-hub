@@ -20,15 +20,11 @@ services:
     extends:
       file: nginx-proxy/docker-compose.yml
       service: nginx-proxy
-    networks:
-      - ingress
 
   nipple-05:
     extends:
       file: nipple-05/docker-compose.yml
       service: nipple-05
-    networks:
-      - ingress
 
 volumes:
   bitcoin:
@@ -40,6 +36,6 @@ volumes:
 networks:
   bitcoin:
     driver: bridge
-  ingress:
-    driver: bridge
 
+  web:
+    driver: bridge

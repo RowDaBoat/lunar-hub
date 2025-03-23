@@ -7,4 +7,5 @@ services:
       - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-
+    networks:
+      - web
