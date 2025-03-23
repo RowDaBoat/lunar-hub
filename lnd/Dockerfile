@@ -23,9 +23,6 @@ RUN apk add --no-cache --update alpine-sdk \
 # Start a new, final image.
 FROM alpine as final
 
-# Define a root volume for data persistence.
-VOLUME /root/.lnd
-
 # Add utilities for quality of life and SSL-related reasons. We also require
 # curl and gpg for the signature verification script.
 RUN apk --no-cache add \
@@ -46,9 +43,10 @@ COPY --from=builder /go/src/github.com/lightningnetwork/lnd/scripts/keys/* /keys
 RUN sha256sum /bin/lnd /bin/lncli > /shasums.txt \
   && cat /shasums.txt
 
+COPY poll-bitcoind.sh .
 COPY start.sh .
-RUN chmod +x ./start.sh
-COPY lnd.conf ./
+RUN chmod +x ./start.sh ./poll-bitcoind.sh
+COPY lnd.conf ./root/.lnd/lnd.conf
 
 # Expose lnd ports (p2p, rpc).
 EXPOSE 9735 10009

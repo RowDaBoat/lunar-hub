@@ -11,9 +11,9 @@ echo "ord.conf:"
 cat ord.conf
 echo ""
 
-# Wait for cookie to be available
+# Wait for bitcoind to be available
 COOKIE_FILE=$(grep -E '^cookie_file: ' ord.conf | awk -F ': ' '{print $2}')
-echo "Waiting for bitcoind's cookie file to be created..."
+./poll-bitcoind.sh $COOKIE_FILE
 
 while [ ! -f $COOKIE_FILE ]; do
   sleep 1

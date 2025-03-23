@@ -16,20 +16,15 @@ PARAMS="\
     --bitcoind.zmqpubrawblock=tcp://$RPCHOST:28332 \
     --bitcoind.zmqpubrawtx=tcp://$RPCHOST:28333"
 
-# Move lnd.conf to the default location and print it
+# Print lnd.conf
 LND_CONF="/root/.lnd/lnd.conf"
-mv /lnd.conf $LND_CONF
 echo "lnd.conf:"
 cat $LND_CONF
 echo ""
 
-# Wait for cookie to be available
+# Wait for bitcoind to be available
 COOKIE_FILE=$(grep -E '^bitcoind\.rpccookie=' "$LND_CONF" | awk -F '=' '{print $2}')
-echo "Waiting for bitcoind's cookie file to be created..."
-
-while [ ! -f $COOKIE_FILE ]; do
-  sleep 1
-done
+./poll-bitcoind.sh $COOKIE_FILE
 
 # Print command
 echo "Command: lnd $PARAMS"

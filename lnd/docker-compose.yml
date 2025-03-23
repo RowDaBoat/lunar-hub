@@ -5,7 +5,6 @@ services:
     build:
       context: ./
     volumes:
-      - lnd:/root/.lnd
       - bitcoin:/data
     entrypoint: ["./start.sh"]
     networks:
