@@ -5,8 +5,10 @@ _No Drama Operations for Bitcoin and frens._
 ## What's nodrop.btc?
 - An easily extensible bare-bones approach to DevOps on Bitcoin that minimizes dependencies.
 - `nodrop.btc` integrates well-known Bitcoin-related services in a simple way using `docker` to run and manage services.
-- Configurations aim to be the most unassuming possible, generated with guided scripts, but still retaining the full customization options of each service.
+- Configurations aim to be as simple as possible, generated with guided scripts, but still retaining the full customization options of each service.
+- Startup scripts solve usual pitfalls such as waiting for other services to be available.
 - Encourages newcomers to install Bitcoin's ecosystem services without the hassle.
+
 
 ## Requirements
 Any Linux machine with `Linux`, `git`, and `docker`.
@@ -30,7 +32,7 @@ Stop all three any time with:
 
 The `*-group.sh` scripts wrap `docker compose` for convenience. Any one of the services can be started or stopped individually with regular `docker compose` commands:
 ```
-docker compose up lnd
+docker compose up -d lnd
 docker compose down lnd
 ```
 
@@ -58,7 +60,6 @@ docker compose up -d --build bitcoind
 
 
 ## Service Structure
-
 Each service has:
 - An entry in the root `docker-compose.yml` detailing the service name and where to locate the actual service's `docker-compose.yml` file.
 - A directory named after the service containing a `docker-compose.yml` file describing the service's container, the volumes it requires, the ports it uses, and which network it connects to.
