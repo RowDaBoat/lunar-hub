@@ -1,4 +1,3 @@
-version: '3'
 services:
   lnd:
     image: lnd${ENV_SUFFIX}
