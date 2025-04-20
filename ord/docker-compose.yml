@@ -4,6 +4,8 @@ services:
     container_name: ord${ENV_SUFFIX}
     build:
       context: ./
+    ports:
+      - "5080:80"
     volumes:
       - bitcoin:/data
     entrypoint: ["./start.sh"]

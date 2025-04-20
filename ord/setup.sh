@@ -8,8 +8,9 @@ prepare "ord.conf"
 
 save_config "bitcoin_data_dir" "/data"
 save_config "data_dir" "/data/ord"
+save_config "bitcoin_rpc_url" "bitcoind:8332"
 
-NETWORK=$(ask "Chain (mainnet|regtest|signet|testnet|testnet4)" "testnet")
+NETWORK=$(ask "Chain (mainnet|regtest|signet|testnet|testnet4)" "testnet4")
 save_config "chain" "$NETWORK"
 
 prompt_config "Index Addresses" "index_addresses" "false"
