@@ -21,6 +21,8 @@ elif [ "$NETWORK" = "regtest" ]; then
     save_config "noseedbackup" "1"
 fi
 
+save_config "rpclisten" "lnd:10009"
+
 save_header "Bitcoind"
 save_config "bitcoind.dir" "/data"
 
@@ -35,5 +37,12 @@ elif [ "$NETWORK" = "signet" ]; then
 elif [ "$NETWORK" = "regtest" ]; then
     save_config "bitcoind.rpccookie" "/data/regtest/.cookie"
 fi
+
+BITCOIN_RPCHOST="bitcoind"
+save_config "bitcoind.rpchost" "$BITCOIN_RPCHOST:8332"
+save_config "bitcoind.zmqpubrawblock" "tcp://$BITCOIN_RPCHOST:28332"
+save_config "bitcoind.zmqpubrawtx" "tcp://$BITCOIN_RPCHOST:28333"
+
+HOSTNAME=$(hostname)
 
 finalize
