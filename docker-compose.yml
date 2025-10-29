@@ -2,27 +2,44 @@ services:
   bitcoind:
     extends:
       file: bitcoind/docker-compose.yml
+      restart: always
       service: bitcoind
 
   lnd:
     extends:
       file: lnd/docker-compose.yml
+      restart: always
       service: lnd
 
   ord:
     extends:
       file: ord/docker-compose.yml
+      restart: always
       service: ord
 
   nginx-proxy:
     extends:
       file: nginx-proxy/docker-compose.yml
+      restart: always
       service: nginx-proxy
 
   nipple-05:
     extends:
       file: nipple-05/docker-compose.yml
+      restart: always
       service: nipple-05
+
+  bond:
+    extends:
+      file: bond/docker-compose.yml
+      restart: always
+      service: bond
+
+  coredns:
+    extends:
+      file: coredns/docker-compose.yml
+      restart: always
+      service: coredns
 
 volumes:
   bitcoin:

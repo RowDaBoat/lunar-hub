@@ -1,0 +1,12 @@
+services:
+  bond:
+    image: rowdaboat/bond:trunk
+    container_name: bond${ENV_SUFFIX}
+    command: ["/bond", "--ord-url", "http://ord${ENV_SUFFIX}:80", "--data-dir", "/data", "--start-block", "1"]
+    ports:
+      - "6080:80"
+    volumes:
+      - bitcoin:/data
+    networks:
+      - bitcoin
+

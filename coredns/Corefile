@@ -1,0 +1,9 @@
+btc.:53 {
+    whoami
+    log
+}
+
+.:53 {
+    forward . 8.8.8.8:53
+    log
+}
