@@ -2,7 +2,7 @@ services:
   bond:
     image: rowdaboat/bond:trunk
     container_name: bond${ENV_SUFFIX}
-    command: ["/bond", "--ord-url", "http://ord${ENV_SUFFIX}:80", "--data-dir", "/data", "--start-block", "1"]
+    command: ["/bond", "--ord-url", "http://ord${ENV_SUFFIX}:80", "--data-dir", "/data", "--start-block", "107000"]
     ports:
       - "6080:80"
     volumes:

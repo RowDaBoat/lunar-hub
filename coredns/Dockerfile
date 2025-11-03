@@ -3,7 +3,7 @@ FROM golang:1.24-alpine as builder
 ARG checkout="master"
 ARG git_url="https://github.com/coredns/coredns.git"
 ENV install="/go/src/github.com/coredns/coredns"
-ENV bond_plugin_name="example"
+ENV bond_plugin_name="bond"
 ENV bond_plugin_repo="github.com/RowDaBoat/bond-coredns"
 ENV GOFLAGS="-buildvcs=false"
 
